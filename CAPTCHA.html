@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CAPTCHA Test</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#111;
+  color:white;
+  font-family:Arial, sans-serif;
+}
+
+#captchaBox{
+  text-align:center;
+  background:#222;
+  padding:40px;
+  border-radius:10px;
+}
+
+#captchaText{
+  font-size:28px;
+  letter-spacing:5px;
+  background:#333;
+  padding:10px 20px;
+  display:inline-block;
+  margin-bottom:20px;
+  user-select:none;
+}
+
+input{
+  padding:10px;
+  font-size:16px;
+  margin-bottom:15px;
+}
+
+button{
+  padding:10px 20px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.result{
+  font-size:48px;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div id="captchaBox">
+  <div id="captchaText"></div>
+  <br>
+  <input id="captchaInput" type="text" placeholder="Enter CAPTCHA">
+  <br>
+  <button onclick="checkCaptcha()">Verify</button>
+</div>
+
+<script>
+let captchaValue = "";
+
+function generateCaptcha(){
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  captchaValue = "";
+  
+  for(let i=0;i<5;i++){
+    captchaValue += chars.charAt(Math.floor(Math.random()*chars.length));
+  }
+
+  document.getElementById("captchaText").innerText = captchaValue;
+}
+
+function checkCaptcha(){
+  const input = document.getElementById("captchaInput").value;
+
+  if(input === captchaValue){
+    document.body.innerHTML = '<div class="result" style="color:lime;">Success!</div>';
+  } else {
+    document.body.innerHTML = '<div class="result" style="color:red;">Fail</div>';
+  }
+}
+
+generateCaptcha();
+</script>
+
+</body>
+</html>
